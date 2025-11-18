@@ -1,0 +1,57 @@
+# -------------------------
+# Python
+# -------------------------
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# -------------------------
+# Virtual environments
+# -------------------------
+
+.venv/
+env/
+venv/
+ENV/
+
+# -------------------------
+# IDE / Editor
+# -------------------------
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# -------------------------
+# OS files
+# -------------------------
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# -------------------------
+# Logs
+# -------------------------
+
+*.log
+
+# -------------------------
+# Bytecode / Caches
+# -------------------------
+
+.cache/
