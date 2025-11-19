@@ -1,11 +1,11 @@
 import pygame
 
-from .config import BG_COLOR, BAR_WIDTH, BAR_GAP, WIDTH, HEIGHT, COLORS, graph_setup
+from .config import BAR_WIDTH, BG_COLOR, UI_HEIGHT, BAR_GAP, WIDTH, HEIGHT, COLORS, graph_setup
 
-def draw_quick(screen, data, font, info):
-    screen.fill(BG_COLOR)
+def draw_quick(screen, data, font_m, font_s, info):
+    pygame.draw.rect(screen, BG_COLOR, (0, UI_HEIGHT, WIDTH, HEIGHT))
     title = "draw_quicksort".replace("draw_", "")
-    graph_setup(screen, font, title)
+    graph_setup(screen, font_m, font_s, title)
 
     for i, val in enumerate(data):
         x = i * (BAR_WIDTH + BAR_GAP)
@@ -13,13 +13,13 @@ def draw_quick(screen, data, font, info):
         color = COLORS["default"]
 
         # ------ ACTIONS ------
-        if info["action"] == "compare" and (i == info["i"] or i == info["j"]):
+        if info.get("action") == "compare" and (i == info.get("i") or i == info.get("j")):
             color = COLORS["compare"]
 
-        if info["k"] == i:
+        if info.get("k") == i:
             color = COLORS["swap"]
 
-        if i in info["placed"]:
+        if i in info.get("placed"):
             color = COLORS["sorted"]
 
         pygame.draw.rect(screen, color, (x, y, BAR_WIDTH, val))

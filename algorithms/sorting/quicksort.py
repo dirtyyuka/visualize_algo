@@ -25,6 +25,7 @@ def quick_sort(arr, low=0, high=None, placed=None):
 
         # final swap
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        yield arr, {"i": high, "j": i + 1, "k": i + 1, "action": "swap", "placed": placed}
         placed.add(i + 1)
         yield arr, {"i": low, "j": high, "action": "sorted", "k": None, "placed": placed}
         return i + 1

@@ -14,7 +14,7 @@ def insertion_sort(arr):
             arr[j + 1] = arr[j]
 
             #shift visualization
-            yield arr, {"i": j, "j": i, "action": "sorted"}
+            yield arr, {"i": j, "j": i, "action": "sorted", "k": None}
 
             j -= 1
 

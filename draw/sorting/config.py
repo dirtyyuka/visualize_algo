@@ -3,6 +3,7 @@ import pygame
 WIDTH, HEIGHT = 800, 600
 BAR_WIDTH = 40
 BAR_GAP = 5
+UI_HEIGHT = 80 + 1
 BG_COLOR = (30, 30, 30)
 
 data = [50, 100, 200, 150, 300, 250, 400, 350, 29, 51, 91, 35, 20, 291, 348, 158, 477]
@@ -17,13 +18,13 @@ COLORS = {
     "x-line": (200, 200, 200),
 }
 
-def graph_setup(screen, font, alg):
+def graph_setup(screen, font_m, font_s, alg):
     # ------ DRAW VERTICAL LINES ------
     for i in range(len(data) + 1):
         x = i * (BAR_WIDTH + BAR_GAP) + 25
-        pygame.draw.line(screen, (50, 50, 50), (x, 25), (x, HEIGHT))
+        pygame.draw.line(screen, (50, 50, 50), (x, 80), (x, HEIGHT))
 
     # ------ Algorithm Title ------
-    surf = font.render(alg.capitalize() + "SORT", True, (255, 255, 255))
-    rect = surf.get_rect(center=(WIDTH // 2, 40))
+    surf = font_m.render(alg.capitalize() + "SORT", True, (255, 255, 255))
+    rect = surf.get_rect(center=(WIDTH // 2, 120 ))
     screen.blit(surf, rect)

@@ -12,4 +12,4 @@ def bubble_sort(arr):
         if not swapped:
             yield arr, {"i": None, "j": None, "action": "sorted", "sorted": i}
             break
-    yield arr, {"i": None, "j": None, "action": "sorted", "sorted": n-1}
+    yield arr, {"i": None, "j": None, "action": "sorted", "sorted": n}

@@ -9,6 +9,7 @@ def bfs(graph, start):
 
     while queue:
         node = queue.popleft()
+        visited.add(node)
 
         yield graph, {"action": "visit", "node": node, "queue": list(queue), "visited": list(visited)}
 
