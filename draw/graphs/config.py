@@ -1,14 +1,22 @@
 import pygame
 
-data = {0: [1, 2], 1: [3, 4], 2: [5], 3: [], 4: [], 5: []}
+data = {0: [(1, 4), (2, 2)],1: [(3, 5), (4, 1)],2: [(5, 7)],3: [],4: [],5: []}
 
 WIDTH, HEIGHT = 800, 600
+BAR_WIDTH = 40
+BAR_GAP = 5
+UI_HEIGHT = 80 + 1
+BG_COLOR = (30, 30, 30)
 
 COLORS = {
-    "node": (120, 180, 255),
-    "visited": (100, 255, 100),
-    "frontier": (255, 170, 80),
-    "current": (255, 100, 100)
+    "default": (170, 200, 255),   # light blue
+    "visited": (80, 120, 255),    # blue
+    "in_queue": (255, 200, 80),   # orange
+    "checking": (255, 120, 120),  # red
+    "path": (120, 255, 120),      # bright green
+    "start": (100, 255, 100),
+    "end": (255, 100, 255),
+    "current": (80, 255, 255)
 }
 
 NODE_POS = {
@@ -32,36 +40,42 @@ def center_positions():
 
     #offset needed
     offset_x = WIDTH // 2 - (min_x + layout_width // 2)
-    offset_y = HEIGHT // 2 - (min_y + layout_height // 2)
+
+    graph_center_y = UI_HEIGHT + (HEIGHT - UI_HEIGHT) // 2
+    offset_y = graph_center_y - (min_y + layout_height // 2)
 
     #apply offset
     return {n: (x + offset_x, y+offset_y) for n, (x, y) in NODE_POS.items()}
 
-def title(screen, font_m, font_s, alg):
+def title(screen, font_m, font_s, stats, alg):
     # ------ Algorithm Title ------
     surf = font_m.render(alg.upper(), True, (255, 255, 255))
-    rect = surf.get_rect(center=(WIDTH // 2, 40))
+    rect = surf.get_rect(center=(WIDTH // 2, 120))
 
     # ------ render node states ------
-    in_queue = font_s.render("in queue", True, (255, 255, 255))
-    visited = font_s.render("visited", True, (255, 255, 255))
-    default = font_s.render("default", True, (255, 255, 255))
+    stats_surf = [font_s.render(s, True, (255, 255, 255)) for s in stats]
 
-    queue_rect = in_queue.get_rect(topright=(WIDTH - 25, 20))
-    visited_rect = visited.get_rect(topright=(WIDTH - 25, 50))
-    default_rect = default.get_rect(topright=(WIDTH - 25, 80))
+    max_width = max(s.get_width() for s in stats_surf)
 
-    # ------ draw text ------
+    # left edge for alignment
+    left_edge = WIDTH - 25 - max_width
+    top_edge = 100
+
+    # create rects
+    stats_rects = []
+    for s in stats_surf:
+        stats_rects.append(s.get_rect(left=left_edge, top=top_edge))
+        top_edge += 30
+
+    # title
     screen.blit(surf, rect)
-    screen.blit(in_queue, queue_rect)
-    screen.blit(visited, visited_rect)
-    screen.blit(default, default_rect)
 
-    # ------ stats circle ------
-    left_x = min(queue_rect.left, visited_rect.left, default_rect.left)
-    circle_x = left_x - 20
+    # ------ STATS RECTS ------
+    for s, r in zip(stats_surf, stats_rects):
+        screen.blit(s, r)
+
+    circle_x = left_edge - 20
     radius = 5
 
-    pygame.draw.circle(screen, COLORS["frontier"], (circle_x, queue_rect.centery), radius)
-    pygame.draw.circle(screen, COLORS["visited"], (circle_x, visited_rect.centery), radius)
-    pygame.draw.circle(screen, COLORS["node"], (circle_x, default_rect.centery), radius)
+    for i, s in enumerate(stats_rects):
+        pygame.draw.circle(screen, COLORS[f"{stats[i]}"], (circle_x, s.centery), radius)

@@ -12,8 +12,8 @@ def draw_merge(screen, data, font_m, font_s, info):
         y = HEIGHT - val
         color = COLORS["default"]
 
-        if info["action"] == "compare":
-            if i == info["a"] or i == info["b"]:
+        if info.get("action") == "compare":
+            if i == info.get("a") or i == info.get("b"):
                 color = COLORS["compare"]
 
         if info.get("i") is not None and info.get("k") is not None:

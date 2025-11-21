@@ -2,10 +2,10 @@ import pygame
 
 from .config import BG_COLOR, UI_HEIGHT, WIDTH, HEIGHT, COLORS, center_positions, title
 
-def draw_bfs(screen, graph, font_m, font_s, info):
+def draw_dfs(screen, graph, font_m, font_s, info):
     node_pos = center_positions()
     pygame.draw.rect(screen, BG_COLOR, (0, UI_HEIGHT, WIDTH, HEIGHT))
-    title(screen, font_m, font_s, "BFS")
+    title(screen, font_m, font_s, "check", "visited", "default", "current", "DFS")
 
     for a in graph:
         for b in graph[a]:
@@ -17,11 +17,11 @@ def draw_bfs(screen, graph, font_m, font_s, info):
         if node in info.get("visited", []):
             color = COLORS["visited"]
 
-        if node in info.get("queue", []):
-            color = COLORS["frontier"]
-
         if node == info.get("node"):
             color = COLORS["current"]
+
+        if node == info.get("neighbor"):
+            color = COLORS["frontier"]
 
         pygame.draw.circle(screen, color, pos, 35)
 
