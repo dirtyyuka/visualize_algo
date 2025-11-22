@@ -5,7 +5,7 @@ import os
 from algorithms import *
 from draw import *
 
-from draw.graphs.config import data, WIDTH, HEIGHT
+from draw.graphs.config import dataset, WIDTH, HEIGHT
 
 ALGORITHMS = {
     "bubble": bubble_sort,
@@ -16,6 +16,7 @@ ALGORITHMS = {
     "bfs": bfs,
     "dfs": dfs,
     "dijkstra": dijkstra,
+    "unionfind": unionfind,
 }
 
 DRAW_MAP = {
@@ -27,6 +28,7 @@ DRAW_MAP = {
     "bfs": draw_bfs,
     "dfs": draw_dfs,
     "dijkstra": draw_dijkstra,
+    "unionfind": draw_unionfind
 }
 
 CURRENT_ALG = "dijkstra"
@@ -84,11 +86,10 @@ def main():
     btn_speed8 = UIButton("8x", 720, 25, font_s)
 
     clock = pygame.time.Clock()
-    sorting = ALGORITHMS[CURRENT_ALG](data.copy(), 0, 5)
+    sorting = ALGORITHMS[CURRENT_ALG](dataset[0].copy(), 0, 5)
+    current_arr, info = next(sorting)
 
     running = True
-    current_arr = []
-    info = {}
 
     paused= False
     step_once = False
@@ -119,8 +120,8 @@ def main():
                     info = {}
                     paused = False
                     step_once = False
-                    current_arr = data.copy()
-                    sorting = ALGORITHMS[CURRENT_ALG](data.copy(), 0, 5)
+                    sorting = ALGORITHMS[CURRENT_ALG](dataset[0].copy(), 0, 5)
+                    current_arr, info = next(sorting)
 
             if btn_speed1.clicked(event): speed = 1
             if btn_speed2.clicked(event): speed = 2

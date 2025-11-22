@@ -5,14 +5,14 @@ from .config import BG_COLOR, UI_HEIGHT, WIDTH, HEIGHT, COLORS, center_positions
 def draw_dfs(screen, graph, font_m, font_s, info):
     node_pos = center_positions()
     pygame.draw.rect(screen, BG_COLOR, (0, UI_HEIGHT, WIDTH, HEIGHT))
-    title(screen, font_m, font_s, "check", "visited", "default", "current", "DFS")
+    title(screen, font_m, font_s, ["checking", "visited", "default", "current"], "DFS")
 
     for a in graph:
         for b in graph[a]:
             pygame.draw.line(screen, (200, 200, 200), node_pos[a], node_pos[b], 2)
 
     for node, pos in node_pos.items():
-        color = COLORS["node"]
+        color = COLORS["default"]
 
         if node in info.get("visited", []):
             color = COLORS["visited"]
@@ -21,7 +21,7 @@ def draw_dfs(screen, graph, font_m, font_s, info):
             color = COLORS["current"]
 
         if node == info.get("neighbor"):
-            color = COLORS["frontier"]
+            color = COLORS["in_queue"]
 
         pygame.draw.circle(screen, color, pos, 35)
 
