@@ -1,11 +1,11 @@
 from typing import Optional, Dict, Any, List, Tuple
 
-
 class Node:
-    key: int
-    left: Optional["Node"] = None
-    right: Optional["Node"] = None
-    height: int = 1
+    def __init__(self, key: int):
+      self.key: int = key
+      self.left: Optional["Node"] = None
+      self.right: Optional["Node"] = None
+      self.height: int = 1
 
 def height(n: Optional["Node"]) -> int:
     return 0 if n is None else n.height

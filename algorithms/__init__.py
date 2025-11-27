@@ -9,5 +9,8 @@ from .graphs .bfs import bfs
 from .graphs .dfs import dfs
 from .graphs .dijkstra import dijkstra
 from .graphs .unionfind import unionfind
+from .tree .avl import avl_generator
 
-__all__ = ["bubble_sort", "merge_sort", "selection_sort", "insertion_sort", "quick_sort", "bfs", "dfs", "dijkstra", "unionfind"]
+__all__ = ["bubble_sort", "merge_sort", "selection_sort", 
+           "insertion_sort", "quick_sort", "bfs", "dfs", 
+           "dijkstra", "unionfind", "avl_generator"]
