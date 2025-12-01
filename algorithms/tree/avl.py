@@ -55,6 +55,12 @@ def avl_insert(root: Optional[Node], key: int) -> Tuple[Optional[Node], List[Dic
 
     def _insert(node):
         if node is None:
+            events.append({
+                "type": "insert",
+                "node_to_dict": None,
+                "rotation": "None",
+                "affected": [key]
+            })
             return Node(key)
         if key < node.key:
             node.left = _insert(node.left)
@@ -62,22 +68,24 @@ def avl_insert(root: Optional[Node], key: int) -> Tuple[Optional[Node], List[Dic
             node.right = _insert(node.right)
         else:
             return node
+        
         update_height(node)
         bf = balance_factor(node)
         if bf > 1 and key < node.left.key:
-            events.append({"type": "rotate", "rotation": "LL", "node": node.key, "affected": [node.key, node.left.key]})
+            events.append({"type": "rotate", "node_to_dict": node_to_dict(root), "rotation": "LL", "node": node.key, "affected": [node.key, node.left.key]})
             return rotate_right(node)
         if bf < -1 and key > node.right.key:
-            events.append({"type": "rotate", "rotation": "RR", "node": node.key, "affected": [node.key, node.right.key]})
+            events.append({"type": "rotate", "node_to_dict": node_to_dict(root), "rotation": "RR", "node": node.key, "affected": [node.key, node.right.key]})
             return rotate_left(node)
         if bf > 1 and key > node.left.key:
-            events.append({"type": "rotate", "rotation": "LR", "node": node.key, "affected": [node.key, node.left.key]})
+            events.append({"type": "rotate", "node_to_dict": node_to_dict(root), "rotation": "LR", "node": node.key, "affected": [node.key, node.left.key]})
             node.left = rotate_left(node.left)
             return rotate_right(node)
         if bf < -1 and key < node.right.key:
-            events.append({"type": "rotate", "rotation": "RL", "node": node.key, "affected": [node.key, node.right.key]})
+            events.append({"type": "rotate", "node_to_dict": node_to_dict(root), "rotation": "RL", "node": node.key, "affected": [node.key, node.right.key]})
             node.right = rotate_right(node.right)
             return rotate_left(node)
+
         return node
 
     new_root = _insert(root)
@@ -85,16 +93,15 @@ def avl_insert(root: Optional[Node], key: int) -> Tuple[Optional[Node], List[Dic
 
 def avl_generator(values):
     root = None
-    yield {}, {"action": "start"}
+    yield {}, {"action": "start", "affected": []}
     for key in values:
-        # target
-        yield node_to_dict(root), {"action": "starting_insert", "key": key}
         root, events = avl_insert(root, key)
-        # display inserted frame
-        yield node_to_dict(root), {"action": "inserted", "key": key}
-        # display each rotation event
+        # ------ insertion ------
+        rotation = affected = None
         for ev in events:
-            yield node_to_dict(root), {"action": "rotate", "rotation": ev["rotation"], "affected": ev["affected"]}
-        # yield height update
-        yield node_to_dict(root), {"action": "update", "heights": node_to_dict(root)}
-    yield node_to_dict(root), {"action": "done"}
+            if ev.get("type") == "insert":
+                yield node_to_dict(root), {"action": "inserted", "key": key}
+            affected = ev["affected"]
+            rotation = ev["rotation"]
+        # yield rotation update
+        yield node_to_dict(root), {"action": "rotate", "rotation": rotation, "affected": affected}

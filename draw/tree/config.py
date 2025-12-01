@@ -4,7 +4,7 @@ BAR_GAP = 5
 UI_HEIGHT = 80 + 1
 BG_COLOR = (30, 30, 30)
 
-data = [1, 2, 3, 4, 5, 6, 7, 8]
+data = [1, 2, 3, 4, 5, 6, 7]
 
 COLORS = {
     "default": (100, 200, 255),

@@ -1,6 +1,5 @@
 import pygame
 import sys
-import os
 
 from algorithms import *
 from draw import *
@@ -96,7 +95,7 @@ def main():
     paused= False
     step_once = False
     speed = 1
-    frame_counter = 0
+    frame_counter = 10
 
     while running:
         clock.tick(60)

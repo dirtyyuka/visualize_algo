@@ -1,5 +1,5 @@
-from typing import Optional
 import pygame
+from typing import Optional
 
 from .config import BAR_WIDTH, BG_COLOR, UI_HEIGHT, BAR_GAP, WIDTH, HEIGHT, COLORS, graph_setup
 
