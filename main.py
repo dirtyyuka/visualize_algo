@@ -16,7 +16,7 @@ ALGORITHMS = {
     "dfs": dfs,
     "dijkstra": dijkstra,
     "unionfind": unionfind,
-    "avl": avl_generator
+    "avl": avl_generator,
 }
 
 DRAW_MAP = {
@@ -29,12 +29,13 @@ DRAW_MAP = {
     "dfs": draw_dfs,
     "dijkstra": draw_dijkstra,
     "unionfind": draw_unionfind,
-    "avl": draw_avl
+    "avl": draw_avl,
 }
 
 CURRENT_ALG = "avl"
 UI_HEIGHT = 80
 BG_COLOR = (30, 30, 30)
+
 
 class UIButton:
     def __init__(self, text, x, y, font, padding=10):
@@ -52,10 +53,11 @@ class UIButton:
         mouse_pos = pygame.mouse.get_pos()
         is_hover = self.rect.collidepoint(mouse_pos)
 
-        pygame.draw.rect(screen,
+        pygame.draw.rect(
+            screen,
             self.hover_color if is_hover else self.color,
             self.rect,
-            border_radius=10
+            border_radius=10,
         )
 
         screen.blit(self.surface, self.surface.get_rect(center=self.rect.center))
@@ -65,6 +67,7 @@ class UIButton:
             if self.rect.collidepoint(event.pos):
                 return True
         return False
+
 
 def main():
     pygame.init()
@@ -92,7 +95,7 @@ def main():
 
     running = True
 
-    paused= False
+    paused = False
     step_once = False
     speed = 1
     frame_counter = 10
@@ -124,10 +127,14 @@ def main():
                     sorting = ALGORITHMS[CURRENT_ALG](data)
                     current_arr, info = next(sorting)
 
-            if btn_speed1.clicked(event): speed = 1
-            if btn_speed2.clicked(event): speed = 2
-            if btn_speed4.clicked(event): speed = 4
-            if btn_speed8.clicked(event): speed = 8
+            if btn_speed1.clicked(event):
+                speed = 1
+            if btn_speed2.clicked(event):
+                speed = 2
+            if btn_speed4.clicked(event):
+                speed = 4
+            if btn_speed8.clicked(event):
+                speed = 8
 
         # ------ CONTINUE GENERATOR -------
         if not paused:
@@ -172,5 +179,5 @@ def main():
     sys.exit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
