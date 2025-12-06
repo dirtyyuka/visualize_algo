@@ -1,7 +1,7 @@
 import pygame
 
-dataset = [{0: [(1, 4), (2, 1)],1: [(0, 4), (3, 1)],2: [(0, 1), (3, 5), (4, 2)],
-            3: [(1, 1), (2, 5), (5, 3)], 4: [(2, 2), (5, 2)],5: [(3, 3), (4, 2)]},
+data = [{0: [(1, 4)], 1:[(2, 5)], 2: [(3, 8)],
+            3: [(4, 5)], 4: [(5, 8)],5: []},
             {0: [1, 2],1: [3, 4],2: [5],3: [], 4: [5],5: []}]
 
 WIDTH, HEIGHT = 800, 600
@@ -65,7 +65,7 @@ def title(screen, font_m, font_s, stats, alg):
     max_width = max(s.get_width() for s in stats_surf)
 
     # left edge for alignment
-    left_edge = WIDTH - 25 - max_width
+    left_edge = 45
     top_edge = 100
 
     # create rects
@@ -81,7 +81,7 @@ def title(screen, font_m, font_s, stats, alg):
     for s, r in zip(stats_surf, stats_rects):
         screen.blit(s, r)
 
-    circle_x = left_edge - 20
+    circle_x = 25
     radius = 5
 
     for i, s in enumerate(stats_rects):

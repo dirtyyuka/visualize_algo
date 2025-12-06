@@ -18,8 +18,9 @@ def draw_dijkstra(screen, graph, font_m, font_s, info):
             mid_x = (ax + bx) // 2
             mid_y = (ay + by) // 2
 
-            weight_surf = font_s.render(str(w), True, (255, 255, 255))
-            weight_rect = weight_surf.get_rect(center=(mid_x + 12, mid_y - 12))
+            pygame.draw.circle(screen, COLORS["default"], (mid_x, mid_y), 12)
+            weight_surf = font_s.render(str(w), True, (0, 0, 0))
+            weight_rect = weight_surf.get_rect(center=(mid_x, mid_y))
 
             screen.blit(weight_surf, weight_rect)
 
