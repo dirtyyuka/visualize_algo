@@ -10,6 +10,7 @@ from .sorting .draw_insertion import draw_insertion
 from .sorting .draw_selection import  draw_selection
 from .sorting .draw_quicksort import draw_quick
 from .tree .draw_avl import draw_avl
+from .basic .draw_sw import draw_sw
 
 __all__ = ["draw_bfs", "draw_dfs", "draw_quick", "draw_merge", "draw_bubble", "draw_insertion", "draw_selection",
-           "draw_dijkstra", "draw_unionfind", "draw_avl"]
+           "draw_dijkstra", "draw_unionfind", "draw_avl", "draw_sw"]

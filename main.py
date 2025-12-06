@@ -17,7 +17,8 @@ ALGORITHMS = {
     "dfs": dfs,
     "dijkstra": dijkstra,
     "unionfind": unionfind,
-    "avl": avl_generator
+    "avl": avl_generator,
+    "sw": slidingwindow,
 }
 
 DRAW_MAP = {
@@ -30,7 +31,8 @@ DRAW_MAP = {
     "dfs": draw_dfs,
     "dijkstra": draw_dijkstra,
     "unionfind": draw_unionfind,
-    "avl": draw_avl
+    "avl": draw_avl,
+    "sw": draw_sw,
 }
 
 CURRENT_ALG = "avl"

@@ -10,7 +10,8 @@ from .graphs .dfs import dfs
 from .graphs .dijkstra import dijkstra
 from .graphs .unionfind import unionfind
 from .tree .avl import avl_generator
+from .basic .sw import slidingwindow
 
 __all__ = ["bubble_sort", "merge_sort", "selection_sort", 
            "insertion_sort", "quick_sort", "bfs", "dfs", 
-           "dijkstra", "unionfind", "avl_generator"]
+           "dijkstra", "unionfind", "avl_generator", "slidingwindow"]
