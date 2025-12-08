@@ -1,5 +1,4 @@
-from typing import Optional, Dict, Any, List, Tuple
-
+from typing import Optional, Dict, Any, List, Tuple 
 class Node:
     def __init__(self, key: int):
       self.key: int = key

@@ -122,6 +122,13 @@ def draw_avl(screen, tree, font_m, font_s, info):
 
         pygame.draw.circle(screen, color, (x, y), 35)
 
+    text = font_m.render(str(k), True, (0, 0, 0))
+    screen.blit(text, text.get_rect(center=(x, y)))
+  
+  pygame.display.flip()
+
+
+
         text = font_m.render(str(k), True, (0, 0, 0))
         screen.blit(text, text.get_rect(center=(x, y)))
 
