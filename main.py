@@ -5,7 +5,7 @@ import os
 from algorithms import *
 from draw import *
 
-from draw.tree.config import data, WIDTH, HEIGHT
+from draw.basic.config import data, WIDTH, HEIGHT
 
 ALGORITHMS = {
     "bubble": bubble_sort,
@@ -35,7 +35,7 @@ DRAW_MAP = {
     "sw": draw_sw,
 }
 
-CURRENT_ALG = "avl"
+CURRENT_ALG = "sw"
 UI_HEIGHT = 80
 BG_COLOR = (30, 30, 30)
 
@@ -90,7 +90,7 @@ def main():
     btn_speed8 = UIButton("8x", 720, 25, font_s)
 
     clock = pygame.time.Clock()
-    sorting = ALGORITHMS[CURRENT_ALG](data)
+    sorting = ALGORITHMS[CURRENT_ALG](data, 10)
     current_arr, info = next(sorting)
 
     running = True
@@ -124,7 +124,7 @@ def main():
                     info = {}
                     paused = False
                     step_once = False
-                    sorting = ALGORITHMS[CURRENT_ALG](data)
+                    sorting = ALGORITHMS[CURRENT_ALG](data, 10)
                     current_arr, info = next(sorting)
 
             if btn_speed1.clicked(event): speed = 1
