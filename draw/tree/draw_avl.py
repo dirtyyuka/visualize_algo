@@ -80,7 +80,7 @@ def draw_avl(screen, tree, font_m, font_s, info):
             none_text,
             none_text.get_rect(topleft=(rect.width + 30 + 10, UI_HEIGHT + 30)),
         )
-    
+
     text2 = font_s.render("Rotation:", True, (255, 255, 255))
     rect2 = text2.get_rect(topleft=(30, UI_HEIGHT + 60))
     screen.blit(text2, rect2)
@@ -121,13 +121,6 @@ def draw_avl(screen, tree, font_m, font_s, info):
             color = COLORS["rotate"]
 
         pygame.draw.circle(screen, color, (x, y), 35)
-
-    text = font_m.render(str(k), True, (0, 0, 0))
-    screen.blit(text, text.get_rect(center=(x, y)))
-  
-  pygame.display.flip()
-
-
 
         text = font_m.render(str(k), True, (0, 0, 0))
         screen.blit(text, text.get_rect(center=(x, y)))

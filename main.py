@@ -4,7 +4,7 @@ import sys
 from algorithms import *
 from draw import *
 
-from draw.basic.config import data, WIDTH, HEIGHT
+from draw.graphs.config import data, WIDTH, HEIGHT
 
 ALGORITHMS = {
     "bubble": bubble_sort,
@@ -34,9 +34,10 @@ DRAW_MAP = {
     "sw": draw_sw,
 }
 
-CURRENT_ALG = "sw"
+CURRENT_ALG = "dijkstra"
 UI_HEIGHT = 80
 BG_COLOR = (30, 30, 30)
+
 
 class UIButton:
     def __init__(self, text, x, y, font, padding=10):
@@ -54,10 +55,11 @@ class UIButton:
         mouse_pos = pygame.mouse.get_pos()
         is_hover = self.rect.collidepoint(mouse_pos)
 
-        pygame.draw.rect(screen,
+        pygame.draw.rect(
+            screen,
             self.hover_color if is_hover else self.color,
             self.rect,
-            border_radius=10
+            border_radius=10,
         )
 
         screen.blit(self.surface, self.surface.get_rect(center=self.rect.center))
@@ -67,6 +69,7 @@ class UIButton:
             if self.rect.collidepoint(event.pos):
                 return True
         return False
+
 
 def main():
     pygame.init()
@@ -89,12 +92,12 @@ def main():
     btn_speed8 = UIButton("8x", 720, 25, font_s)
 
     clock = pygame.time.Clock()
-    sorting = ALGORITHMS[CURRENT_ALG](data, 10)
+    sorting = ALGORITHMS[CURRENT_ALG](data[0], 0, 5)
     current_arr, info = next(sorting)
 
     running = True
 
-    paused= False
+    paused = False
     step_once = False
     speed = 1
     frame_counter = 0
@@ -123,13 +126,17 @@ def main():
                     info = {}
                     paused = False
                     step_once = False
-                    sorting = ALGORITHMS[CURRENT_ALG](data, 10)
+                    sorting = ALGORITHMS[CURRENT_ALG](data[0], 0, 5)
                     current_arr, info = next(sorting)
 
-            if btn_speed1.clicked(event): speed = 1
-            if btn_speed2.clicked(event): speed = 2
-            if btn_speed4.clicked(event): speed = 4
-            if btn_speed8.clicked(event): speed = 8
+            if btn_speed1.clicked(event):
+                speed = 1
+            if btn_speed2.clicked(event):
+                speed = 2
+            if btn_speed4.clicked(event):
+                speed = 4
+            if btn_speed8.clicked(event):
+                speed = 8
 
         # ------ CONTINUE GENERATOR -------
         if not paused:
@@ -174,5 +181,5 @@ def main():
     sys.exit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
